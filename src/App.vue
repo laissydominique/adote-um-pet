@@ -68,25 +68,24 @@ async function getDog() {
       });
     }
   } catch (error) {
-    `<p>Não foi possível completar a requisição</p>`
+    `<p>Não foi possível completar a requisição</p>`;
   }
 }
 
 async function getCat() {
+  try {
+    const response = await fetch(
+      `https://api.thecatapi.com/v1/images/search?limit=10`
+    );
+    const data = await response.json();
 
- try{
-   const response = await fetch(
-    `https://api.thecatapi.com/v1/images/search?limit=10`
-  );
-  const data = await response.json();
-
-  for (const cat of data) {
-    dataCats.value.cats.push({
-      imgCat: cat.url,
-    });
-  }
-} catch (error) {
-    `<p>Não foi possível completar a requisição</p>`
+    for (const cat of data) {
+      dataCats.value.cats.push({
+        imgCat: cat.url,
+      });
+    }
+  } catch (error) {
+    `<p>Não foi possível completar a requisição</p>`;
   }
 }
 
@@ -130,7 +129,6 @@ onMounted(() => {
   getDescriptionCat(descriptionsCat);
 });
 </script>
-
 <template>
   <div class="container">
     <header>
@@ -151,29 +149,25 @@ onMounted(() => {
         </div>
       </nav>
     </header>
-
     <div class="content">
       <div class="title-dogs" id="title-dogs">
         <div class="one"></div>
-        <h1 class="animate__animated animate__backInDown" >CACHORROS</h1>
+        <h1 class="animate__animated animate__backInDown">CACHORROS</h1>
         <div class="two"></div>
       </div>
       <div class="content-dogs">
         <div class="allDogs">
           <div
-            class="slide-up imagensDogs"
+            class="imagensDogs"
             id="imagensDogs"
-            v-for="(item, index) in dataDogs.dogs"
-            :key="index"
-          >
+            v-for="(item, index) in dataDogs.dogs">
             <div class="imagemDog">
               <img
                 :src="item.imgDog"
                 alt=""
                 srcset=""
                 width="360rem"
-                height="345rem"
-              />
+                height="345rem"/>
             </div>
             <div class="nome">
               <p>{{ descriptionsDog[index] }}</p>
@@ -184,7 +178,7 @@ onMounted(() => {
       <div class="test">
         <div class="title-cats" id="title-cats">
           <div class="one"></div>
-          <h1 class="dog animate__animated animate__backInDown" >GATOS</h1>
+          <h1 class="dog animate__animated animate__backInDown">GATOS</h1>
           <div class="two"></div>
         </div>
       </div>
@@ -194,18 +188,15 @@ onMounted(() => {
             class="imagensCats"
             id="imagensCats"
             v-for="(item, index) in dataCats.cats"
-            :key="item"
-          >
+            :key="item">
             <div class="imagemCat">
               <img
                 :src="item.imgCat"
                 alt="Imagem Gato"
                 srcset=""
                 width="360rem"
-                height="345rem"
-              />
+                height="345rem"/>
             </div>
-
             <div class="nome">
               <p>{{ descriptionsCat[index] }}</p>
             </div>
